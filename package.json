@@ -1,7 +1,7 @@
 {
 	"name": "@crazygl/hero-api-network-map",
-	"version": "0.1.0",
-	"description": "API Network Map — a 3D animated graph of API services connected by glowing lines, with light pulses streaming along the connections. For developer tools and API platform landing pages.",
+	"version": "0.1.1",
+	"description": "API Network Map — A polished, three-dimensional graph of API services connected by glowing lines, with pulses of light traveling along each connection like requests in flight. Built for developer-tools, API-platforms,… A customizable CrazyGL animated hero section — WebGL, React, drop-in.",
 	"type": "module",
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
@@ -21,7 +21,7 @@
 		"LICENSE"
 	],
 	"dependencies": {
-		"@crazygl/core": "^0.1.0",
+		"@crazygl/core": "^0.1.1",
 		"three": "^0.160.0"
 	},
 	"peerDependencies": {
@@ -37,5 +37,33 @@
 	},
 	"publishConfig": {
 		"access": "public"
+	},
+	"keywords": [
+		"three",
+		"3d",
+		"api",
+		"network",
+		"graph",
+		"infrastructure",
+		"developer-tools",
+		"nodes",
+		"pulses",
+		"premium",
+		"api-network-map",
+		"crazygl",
+		"hero",
+		"hero-section",
+		"webgl",
+		"react",
+		"animation",
+		"ui",
+		"landing-page",
+		"interactive",
+		"frontend",
+		"component",
+		"canvas"
+	],
+	"bugs": {
+		"url": "https://github.com/crazygl-com/hero-api-network-map/issues"
 	}
 }

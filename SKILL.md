@@ -3,7 +3,7 @@ name: api-network-map
 description: "A polished, three-dimensional graph of API services connected by glowing lines, with pulses of light traveling along each connection like requests in flight. Built for developer-tools, API-platforms, and infrastructure landing pages."
 metadata:
   author: "@ybouane"
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 ## How To Use This Skill
