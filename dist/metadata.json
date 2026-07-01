@@ -1,0 +1,507 @@
+{
+  "name": "API Network Map",
+  "slug": "api-network-map",
+  "version": 1,
+  "description": "A polished, three-dimensional graph of API services connected by glowing lines, with pulses of light traveling along each connection like requests in flight. Built for developer-tools, API-platforms, and infrastructure landing pages.",
+  "dependencies": [
+    "three"
+  ],
+  "authorName": "@ybouane",
+  "authorUrl": "https://x.com/ybouane",
+  "tags": [
+    "three",
+    "3d",
+    "api",
+    "network",
+    "graph",
+    "infrastructure",
+    "developer-tools",
+    "nodes",
+    "pulses",
+    "premium"
+  ],
+  "category": "Premium",
+  "featured": true,
+  "poster": "/images/heroes/api-network-map.png",
+  "install": {
+    "package": "@crazygl/hero-api-network-map"
+  },
+  "config": {
+    "managedWidth": true,
+    "innerWidth": 1100,
+    "managedHeight": true,
+    "defaultHeight": 780,
+    "styleInheritance": "none",
+    "usesCanvas": true,
+    "usesWebGL": true,
+    "usesThree": true,
+    "pointerTracking": true,
+    "resizeTracking": true,
+    "interactive": true,
+    "supportsImages": false,
+    "supportsTransparency": true,
+    "supportsFontCustomization": true,
+    "interactivityModes": [
+      "pointer",
+      "none"
+    ],
+    "interactivity": "pointer"
+  },
+  "customizer": {
+    "sections": [
+      {
+        "label": "Content",
+        "fields": [
+          {
+            "id": "contentType",
+            "label": "Content Type",
+            "type": "select",
+            "default": "heading",
+            "options": [
+              {
+                "label": "Heading",
+                "value": "heading"
+              },
+              {
+                "label": "Two Columns",
+                "value": "two-columns"
+              },
+              {
+                "label": "Custom",
+                "value": "custom"
+              }
+            ]
+          },
+          {
+            "id": "heading",
+            "label": "Heading",
+            "type": "text",
+            "default": "Every request, in flight.",
+            "showWhen": {
+              "contentType": "heading"
+            }
+          },
+          {
+            "id": "subheading",
+            "label": "Subheading",
+            "type": "textarea",
+            "default": "Watch your APIs come alive \u2014 services, queues, edges and gateways, wired together and humming with live traffic.",
+            "showWhen": {
+              "contentType": "heading"
+            }
+          },
+          {
+            "id": "column1",
+            "label": "Column 1",
+            "type": "node",
+            "default": "<h2>Your stack, visible.</h2><p>Auth, payments, queues, edge \u2014 every service in one map.</p>",
+            "showWhen": {
+              "contentType": "two-columns"
+            }
+          },
+          {
+            "id": "column2",
+            "label": "Column 2",
+            "type": "node",
+            "default": "<h2>Built for API platforms.</h2><p>Pulses on each line trace real request flow, like packets on a wire.</p>",
+            "showWhen": {
+              "contentType": "two-columns"
+            }
+          },
+          {
+            "id": "content",
+            "label": "Content",
+            "type": "node",
+            "default": "<h1>Every request, in flight.</h1>",
+            "showWhen": {
+              "contentType": "custom"
+            }
+          }
+        ]
+      },
+      {
+        "label": "CTA",
+        "fields": [
+          {
+            "id": "ctaLabel",
+            "label": "CTA label",
+            "type": "text",
+            "default": "View the map \u2192",
+            "description": "Default CTA text. Set empty to hide the CTA."
+          },
+          {
+            "id": "onCTAClick",
+            "label": "On click",
+            "type": "text",
+            "default": "",
+            "description": "URL to navigate to on click. Code consumers can also pass a function \u2014 same prop name, type-detected at runtime."
+          },
+          {
+            "id": "ctaTextColor",
+            "label": "CTA text colour",
+            "type": "color",
+            "default": "#03060e"
+          },
+          {
+            "id": "ctaBgColor",
+            "label": "CTA background",
+            "type": "color",
+            "default": "#dfeaff"
+          },
+          {
+            "id": "ctaGlowColor",
+            "label": "CTA glow",
+            "type": "color",
+            "default": "#5d8bff"
+          }
+        ]
+      },
+      {
+        "label": "Nodes",
+        "fields": [
+          {
+            "id": "nodeLabels",
+            "label": "Service labels",
+            "type": "textarea",
+            "default": "auth\npayments\ndb\nqueue\nedge\ngateway\ncache\nstorage\nsearch\nworkers\nwebhooks\nanalytics",
+            "description": "One service label per line. Each becomes a node in the graph. 8\u201314 labels reads cleanest; below 6 looks sparse."
+          },
+          {
+            "id": "nodeColor",
+            "label": "Node colour",
+            "type": "color",
+            "default": "#bfd6ff",
+            "description": "Body colour of the nodes. The accent colour is mixed in for ~25% of them."
+          },
+          {
+            "id": "accentColor",
+            "label": "Accent colour",
+            "type": "color",
+            "default": "#7aa9ff",
+            "description": "Secondary tint used on a subset of nodes and on every connection line."
+          },
+          {
+            "id": "nodeSize",
+            "label": "Node size",
+            "type": "slider",
+            "default": 0.18,
+            "min": 0.08,
+            "max": 0.32,
+            "step": 0.005,
+            "unit": "world",
+            "description": "Radius of each node. 0.18 reads as substantial without crowding; below 0.12 reads as dots."
+          },
+          {
+            "id": "nodeMetalness",
+            "label": "Node metalness",
+            "type": "slider",
+            "default": 0.55,
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "description": "0 = matte; 1 = chrome. 0.55 reads as polished ceramic / soft chrome."
+          },
+          {
+            "id": "nodeRoughness",
+            "label": "Node roughness",
+            "type": "slider",
+            "default": 0.28,
+            "min": 0.05,
+            "max": 1,
+            "step": 0.01
+          },
+          {
+            "id": "showLabels",
+            "label": "Show labels",
+            "type": "toggle",
+            "default": true,
+            "description": "Display the service name beside each node."
+          },
+          {
+            "id": "labelStyle",
+            "label": "Label style",
+            "type": "select",
+            "default": "glass",
+            "showWhen": {
+              "showLabels": true
+            },
+            "options": [
+              {
+                "label": "Glass chips",
+                "value": "glass"
+              },
+              {
+                "label": "Solid badges",
+                "value": "solid"
+              },
+              {
+                "label": "Neon outline",
+                "value": "outline"
+              },
+              {
+                "label": "Terminal tags",
+                "value": "terminal"
+              },
+              {
+                "label": "Minimal text",
+                "value": "minimal"
+              }
+            ]
+          },
+          {
+            "id": "labelTextColor",
+            "label": "Label text",
+            "type": "color",
+            "default": "#f4f8ff",
+            "showWhen": {
+              "showLabels": true
+            }
+          },
+          {
+            "id": "labelBgColor",
+            "label": "Label background",
+            "type": "color",
+            "default": "#071020",
+            "showWhen": {
+              "showLabels": true
+            }
+          },
+          {
+            "id": "labelBorderColor",
+            "label": "Label border",
+            "type": "color",
+            "default": "#9cc2ff",
+            "showWhen": {
+              "showLabels": true
+            }
+          },
+          {
+            "id": "labelGlowColor",
+            "label": "Label glow",
+            "type": "color",
+            "default": "#5d8bff",
+            "showWhen": {
+              "showLabels": true
+            }
+          },
+          {
+            "id": "labelScale",
+            "label": "Label scale",
+            "type": "slider",
+            "default": 1.12,
+            "min": 0.7,
+            "max": 1.6,
+            "step": 0.02,
+            "showWhen": {
+              "showLabels": true
+            }
+          },
+          {
+            "id": "labelOpacity",
+            "label": "Label opacity",
+            "type": "slider",
+            "default": 1,
+            "min": 0,
+            "max": 1,
+            "step": 0.02,
+            "showWhen": {
+              "showLabels": true
+            }
+          },
+          {
+            "id": "labelMinOpacity",
+            "label": "Far label opacity",
+            "type": "slider",
+            "default": 0.62,
+            "min": 0,
+            "max": 1,
+            "step": 0.02,
+            "showWhen": {
+              "showLabels": true
+            },
+            "description": "Minimum opacity for labels on deeper nodes. Raising this makes the whole map more annotated."
+          },
+          {
+            "id": "labelOffsetX",
+            "label": "Label X offset",
+            "type": "slider",
+            "default": 12,
+            "min": -40,
+            "max": 60,
+            "step": 1,
+            "unit": "px",
+            "showWhen": {
+              "showLabels": true
+            }
+          },
+          {
+            "id": "labelOffsetY",
+            "label": "Label Y offset",
+            "type": "slider",
+            "default": 10,
+            "min": -40,
+            "max": 60,
+            "step": 1,
+            "unit": "px",
+            "showWhen": {
+              "showLabels": true
+            }
+          }
+        ]
+      },
+      {
+        "label": "Connections",
+        "fields": [
+          {
+            "id": "connectionDensity",
+            "label": "Connection density",
+            "type": "slider",
+            "default": 0.45,
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "description": "Fraction of possible node pairs connected. 0.45 reads as a busy-but-legible mesh; above 0.7 starts to look like a web; below 0.2 reads as a sparse tree."
+          },
+          {
+            "id": "lineColor",
+            "label": "Line colour",
+            "type": "color",
+            "default": "#5d8bff"
+          },
+          {
+            "id": "lineOpacity",
+            "label": "Line opacity",
+            "type": "slider",
+            "default": 0.45,
+            "min": 0.05,
+            "max": 1,
+            "step": 0.01,
+            "description": "Base brightness of the connections (separate from the pulses on top)."
+          },
+          {
+            "id": "lineWidth",
+            "label": "Line width",
+            "type": "slider",
+            "default": 2.2,
+            "min": 0.4,
+            "max": 8,
+            "step": 0.1,
+            "unit": "px",
+            "description": "Screen-space width of the base connection strokes. Uses billboarded line geometry, so the control works consistently across browsers."
+          },
+          {
+            "id": "pulseColor",
+            "label": "Pulse colour",
+            "type": "color",
+            "default": "#aee0ff",
+            "description": "Colour of the bright blobs traveling along each line."
+          },
+          {
+            "id": "pulseSpeed",
+            "label": "Pulse speed",
+            "type": "slider",
+            "default": 0.45,
+            "min": 0,
+            "max": 2,
+            "step": 0.01,
+            "unit": "/s",
+            "description": "How fast the pulses travel along each connection. 0.45 reads as steady traffic; 0 freezes them."
+          },
+          {
+            "id": "pulseIntensity",
+            "label": "Pulse intensity",
+            "type": "slider",
+            "default": 1.2,
+            "min": 0,
+            "max": 2.5,
+            "step": 0.05,
+            "description": "Brightness multiplier on each pulse. 1.2 reads as 'glowing', 2.0+ blows out, 0 hides them."
+          },
+          {
+            "id": "pulsesPerLine",
+            "label": "Pulses per line",
+            "type": "slider",
+            "default": 2,
+            "min": 1,
+            "max": 4,
+            "step": 1,
+            "description": "Number of light blobs traveling along each connection at once."
+          }
+        ]
+      },
+      {
+        "label": "Camera",
+        "fields": [
+          {
+            "id": "autoRotate",
+            "label": "Auto rotate",
+            "type": "toggle",
+            "default": true,
+            "description": "Camera slowly orbits the graph. Ignored under reduced-motion."
+          },
+          {
+            "id": "driftSpeed",
+            "label": "Drift speed",
+            "type": "slider",
+            "default": 0.06,
+            "min": 0,
+            "max": 0.4,
+            "step": 0.005,
+            "unit": "rad/s",
+            "description": "Auto-rotate angular velocity. 0.06 is slow and cinematic; above 0.2 starts to feel busy."
+          },
+          {
+            "id": "pointerParallax",
+            "label": "Pointer parallax",
+            "type": "slider",
+            "default": 0.35,
+            "min": 0,
+            "max": 1,
+            "step": 0.01,
+            "description": "How much the camera tilts in response to the pointer. 0 disables; 1 is exaggerated."
+          },
+          {
+            "id": "cameraDistance",
+            "label": "Camera distance",
+            "type": "slider",
+            "default": 6.0,
+            "min": 3.5,
+            "max": 10,
+            "step": 0.05,
+            "unit": "world",
+            "description": "How far the camera sits from the graph centre."
+          }
+        ]
+      },
+      {
+        "label": "Atmosphere",
+        "fields": [
+          {
+            "id": "bgTop",
+            "label": "Background top",
+            "type": "color",
+            "default": "#0a1228",
+            "showWhen": {
+              "transparentBackground": false
+            }
+          },
+          {
+            "id": "bgBottom",
+            "label": "Background bottom",
+            "type": "color",
+            "default": "#03060e",
+            "showWhen": {
+              "transparentBackground": false
+            }
+          },
+          {
+            "id": "transparentBackground",
+            "label": "Transparent background",
+            "type": "toggle",
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+}
